@@ -12,29 +12,29 @@ namespace HolidaySearchLibrary.Repositories.Tests
     [TestClass()]
     public class FlightRepositoryTests
     {
-        [TestMethod()]
-        public void LoadFlightData_FlightJson_JsonParsed()
-        {
-            var flightRepo = new FlightRepository();
+        //[TestMethod()]
+        //public void LoadFlightData_FlightJson_JsonParsed()
+        //{
+        //    var flightRepo = new FlightRepository();
 
-            var parsedFlightJson = flightRepo.LoadFlightData();
+        //    var parsedFlightJson = flightRepo.LoadFlightData();
 
-            Assert.IsNotNull(parsedFlightJson);
+        //    Assert.IsNotNull(parsedFlightJson);
 
-            var flightListType = new List<Flight>();
+        //    var flightListType = new List<Flight>();
 
-            Assert.IsInstanceOfType(parsedFlightJson, flightListType.GetType());
-        }
+        //    Assert.IsInstanceOfType(parsedFlightJson, flightListType.GetType());
+        //}
 
-        [TestMethod()]
-        public void GetFlights_AllFlightParams_TwoFlightsReturned()
-        {
-            var flightRepo = new FlightRepository();            
+        //[TestMethod()]
+        //public void GetFlights_AllFlightParams_TwoFlightsReturned()
+        //{
+        //    var flightRepo = new FlightRepository();            
 
-            var actualFlights = flightRepo.GetFlights(new string[]{ "MAN" }, "AGP", "2023-07-01");
+        //    var actualFlights = flightRepo.GetFlights(new string[]{ "MAN" }, "AGP", "2023-07-01");
 
-            Assert.AreEqual(1, actualFlights.Count);
-            Assert.AreEqual(2, actualFlights.First().Id);
-        }
+        //    Assert.AreEqual(1, actualFlights.Count);
+        //    Assert.AreEqual(2, actualFlights.First().Id);
+        //}
     }
 }

@@ -10,10 +10,14 @@ namespace HolidaySearchLibrary.Repositories
 {
     public class HotelRepository : IHotelRepository
     {
-        private List<Hotel>? hotels;
-        public List<Hotel> GetHotels(string arrivalAirport, string arrivalDate, string duration)
+        private List<Hotel> hotels;
+        public List<Hotel> GetHotels(string arrivalAirport, string arrivalDate, int duration)
         {
-            throw new NotImplementedException();
+            LoadHotelData();
+            var hotelResults = hotels.FindAll(h => h.LocalAirports.Contains(arrivalAirport))
+                .FindAll(h => h.ArrivalDate == arrivalDate)
+                .FindAll(h => h.Nights == duration);
+            return hotelResults;
         }
 
         public List<Hotel> LoadHotelData()

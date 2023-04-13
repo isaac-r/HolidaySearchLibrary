@@ -27,7 +27,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
         }
 
         [TestMethod()]
-        public void GetHotelsTest()
+        public void GetHotels_AllHotelParams_TwoHotelsReturned()
         {
             var hotelRepo = new HotelRepository();
 

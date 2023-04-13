@@ -1,4 +1,5 @@
-﻿using HolidaySearchLibrary.Repositories;
+﻿using HolidaySearchLibrary.Models;
+using HolidaySearchLibrary.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,22 @@ namespace HolidaySearchLibrary.Services
         // HolidaySearch
 
         // PackageHolidayResults
-
-        // PackageHoliday
+        public List<Package> PackageHolidayResults(List<Flight> flightsList, List<Hotel> hotelsList)
+        {
+            var holidayPackages = new List<Package>();
+            foreach (var flight in flightsList)
+            {
+                foreach(var hotel in hotelsList)
+                {
+                    holidayPackages.Add(new Package
+                    {
+                        Flight = flight,
+                        Hotel = hotel
+                    });
+                }
+            }
+            return holidayPackages;
+        }
 
         // SortHolidayResultsByPrice
     }

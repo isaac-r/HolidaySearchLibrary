@@ -13,7 +13,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
     public class HotelRepositoryTests
     {
         [TestMethod()]
-        public void LoadHotelDataTest()
+        public void LoadHotelData_HotelJson_JsonParsed()
         {
             var hotelRepo = new HotelRepository();
 

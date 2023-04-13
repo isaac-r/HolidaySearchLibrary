@@ -1,4 +1,5 @@
 ﻿using HolidaySearchLibrary.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,9 @@ namespace HolidaySearchLibrary.Repositories
 
         public List<Hotel> LoadHotelData()
         {
-            throw new NotImplementedException();
+            var filename = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\HotelData.json"));
+            hotels = JsonConvert.DeserializeObject<List<Hotel>>(filename) ?? new List<Hotel>();
+            return hotels;
         }
     }
 }

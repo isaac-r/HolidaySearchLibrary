@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HolidaySearchLibrary.Models;
 
 namespace HolidaySearchLibrary.Repositories.Tests
 {
@@ -20,7 +21,9 @@ namespace HolidaySearchLibrary.Repositories.Tests
 
             Assert.IsNotNull(parsedFlightJson);
 
-            //Assert.Fail();
+            var flightListType = new List<Flight>();
+
+            Assert.IsInstanceOfType(parsedFlightJson, flightListType.GetType());
         }
     }
 }

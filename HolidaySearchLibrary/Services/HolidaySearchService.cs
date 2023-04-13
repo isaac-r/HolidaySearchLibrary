@@ -26,7 +26,9 @@ namespace HolidaySearchLibrary.Services
 
             var packageDeals = PackageHolidayResults(matchedFlights, matchedHotels);
 
-            return packageDeals;
+            var sortedHolidays = SortHolidayResultsByPrice(packageDeals);
+
+            return sortedHolidays;
         }
 
         // PackageHolidayResults
@@ -48,5 +50,9 @@ namespace HolidaySearchLibrary.Services
         }
 
         // SortHolidayResultsByPrice
+        public List<Package> SortHolidayResultsByPrice(List<Package> holidayPackages)
+        {
+            return holidayPackages.OrderBy(p => p.TotalPrice).ToList();            
+        }
     }
 }

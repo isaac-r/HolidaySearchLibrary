@@ -59,7 +59,6 @@ namespace HolidaySearchLibrary.Services.Tests
 
             var results = HolidaySearchService.PackageHolidayResults(flights, hotels);
 
-            Assert.IsNotNull(results);
             Assert.AreEqual(2, results.Count);
         }
 
@@ -72,10 +71,42 @@ namespace HolidaySearchLibrary.Services.Tests
 
             var HolidaySearchService = new HolidaySearchService(flightsRepository, hotelsRepository);
 
-            var results = HolidaySearchService.HolidaySearch("2023-07-01", "MAN", "AGP", 7);
+            var results = HolidaySearchService.HolidaySearch("2023-07-01", new string[] { "MAN" }, "AGP", 7);
 
             Assert.AreEqual(2, results.First().Flight.Id);
             Assert.AreEqual(9, results.First().Hotel.Id);
+        }
+
+        [TestMethod()]
+        public void HolidaySearch_ConcreteRepos_AnyLondonMallorca_10Nights()
+        {
+            // Move to Moq
+            FlightRepository flightsRepository = new();
+            HotelRepository hotelsRepository = new();
+
+            var HolidaySearchService = new HolidaySearchService(flightsRepository, hotelsRepository);
+
+            var results = HolidaySearchService.HolidaySearch("2023-06-15", new string[] { "LTN", "LGW" }, "PMI", 10);
+
+            Assert.AreEqual(4, results.Count);
+
+            Assert.AreEqual(6, results.First().Flight.Id);
+            Assert.AreEqual(5, results.First().Hotel.Id);
+        }
+
+        [TestMethod()]
+        public void HolidaySearch_ConcreteRepos_AnyAirport_14Nights()
+        {
+            // Move to Moq
+            FlightRepository flightsRepository = new();
+            HotelRepository hotelsRepository = new();
+
+            var HolidaySearchService = new HolidaySearchService(flightsRepository, hotelsRepository);
+
+            var results = HolidaySearchService.HolidaySearch("2022-11-10", new string[] { "LTN", "LGW", "MAN" }, "LPA", 14);
+
+            Assert.AreEqual(7, results.First().Flight.Id);
+            Assert.AreEqual(6, results.First().Hotel.Id);
         }
 
         [TestMethod()]

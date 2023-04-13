@@ -10,7 +10,7 @@ namespace HolidaySearchLibrary.Repositories
 {
     public interface IFlightRepository
     {
-        public List<Flight> GetFlights(string departureAirport, string destinationAirport, string departureDate);
+        public List<Flight> GetFlights(string[] departureAirports, string destinationAirport, string departureDate);
 
         public List<Flight> LoadFlightData();
     }

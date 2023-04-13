@@ -27,26 +27,14 @@ namespace HolidaySearchLibrary.Repositories.Tests
         }
 
         [TestMethod()]
-        public void GetFlights_AllFlightParams_OneFlightReturned()
+        public void GetFlights_AllFlightParams_TwoFlightsReturned()
         {
-            var flightRepo = new FlightRepository();
+            var flightRepo = new FlightRepository();            
 
-            var expectedFlights = new List<Flight>()
-            {
-                new Flight
-                {
-                    Id = 1,
-                    Airline = "",
-                    DepartureAirport = "MAN",
-                    DestinationAirport = "TFS",
-                    DepartureDate = "2023-07-01"
-                }
-            };
+            var actualFlights = flightRepo.GetFlights(new string[]{ "MAN" }, "AGP", "2023-07-01");
 
-            var actualFlights = flightRepo.GetFlights("MAN", "TFS", "2023-07-01");
-
-            Assert.AreEqual(expectedFlights.Count, actualFlights.Count);
-            Assert.AreEqual(expectedFlights.First().Id, actualFlights.First().Id);
+            Assert.AreEqual(1, actualFlights.Count);
+            Assert.AreEqual(2, actualFlights.First().Id);
         }
     }
 }

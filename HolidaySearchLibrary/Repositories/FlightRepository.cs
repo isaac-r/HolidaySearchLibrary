@@ -11,12 +11,30 @@ namespace HolidaySearchLibrary.Repositories
     public class FlightRepository : IFlightRepository
     {
         private List<Flight> flights;
-        public List<Flight> GetFlights(string departureAirport, string destinationAirport, string departureDate)
+        public List<Flight> GetFlights(string[] departureAirports, string destinationAirport, string departureDate)
         {
             LoadFlightData();
-            var flightResults = flights.FindAll(f => f.DepartureAirport == departureAirport)
-                .FindAll(f => f.DestinationAirport == destinationAirport)
-                .FindAll(f => f.DepartureDate == departureDate);
+            List<Flight> flightResults = new();
+            if (departureAirports.Length == 1)
+            {
+                flightResults = flights
+                    .FindAll(f => f.DepartureAirport == departureAirports[0])
+                    .FindAll(f => f.DestinationAirport == destinationAirport)
+                    .FindAll(f => f.DepartureDate == departureDate);
+            } else
+            {
+                var tempFlightsList = new List<Flight>();
+                foreach (var airport in departureAirports)
+                {
+                    var filteredFlights = new List<Flight>();
+                    filteredFlights = flights.FindAll(f => f.DepartureAirport == airport);
+                    tempFlightsList.AddRange(filteredFlights);
+                }
+                flightResults = tempFlightsList.ToList()
+                    .FindAll(f => f.DestinationAirport == destinationAirport)
+                    .FindAll(f => f.DepartureDate == departureDate); ;
+            }
+
             return flightResults;
         }
 

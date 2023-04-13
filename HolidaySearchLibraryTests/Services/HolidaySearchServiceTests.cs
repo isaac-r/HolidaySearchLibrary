@@ -17,7 +17,7 @@ namespace HolidaySearchLibrary.Services.Tests
         private IFlightRepository _flightRepository;
         private IHotelRepository _hotelRepository;
         [TestMethod()]
-        public void PackageHolidayResultsTest()
+        public void PackageHolidayResults_OneFlightAndTwoHotels_TwoHolidayPackages()
         {
             var HolidaySearchService = new HolidaySearchService(_flightRepository, _hotelRepository);
 
@@ -61,6 +61,21 @@ namespace HolidaySearchLibrary.Services.Tests
 
             Assert.IsNotNull(results);
             Assert.AreEqual(2, results.Count);
+        }
+
+        [TestMethod()]
+        public void HolidaySearchTest()
+        {
+            // Move to Moq
+            FlightRepository flightsRepository = new();
+            HotelRepository hotelsRepository = new();
+
+            var HolidaySearchService = new HolidaySearchService(flightsRepository, hotelsRepository);
+
+            var results = HolidaySearchService.HolidaySearch("2023-07-01", "MAN", "AGP", 7);
+
+            Assert.AreEqual(2, results.First().Flight.Id);
+            Assert.AreEqual(9, results.First().Hotel.Id);
         }
     }
 }

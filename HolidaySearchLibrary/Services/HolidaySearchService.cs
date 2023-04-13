@@ -19,6 +19,15 @@ namespace HolidaySearchLibrary.Services
         }
 
         // HolidaySearch
+        public List<Package> HolidaySearch(string DepartureDate, string DepartureAirport, string DestinationAirport, int Duration)
+        {
+            var matchedFlights = _flightRepository.GetFlights(DepartureAirport, DestinationAirport, DepartureDate);
+            var matchedHotels = _hotelRepository.GetHotels(DestinationAirport, DepartureDate, Duration);
+
+            var packageDeals = PackageHolidayResults(matchedFlights, matchedHotels);
+
+            return packageDeals;
+        }
 
         // PackageHolidayResults
         public List<Package> PackageHolidayResults(List<Flight> flightsList, List<Hotel> hotelsList)

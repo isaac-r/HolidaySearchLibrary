@@ -25,5 +25,28 @@ namespace HolidaySearchLibrary.Repositories.Tests
 
             Assert.IsInstanceOfType(parsedFlightJson, flightListType.GetType());
         }
+
+        [TestMethod()]
+        public void GetFlights_AllFlightParams_OneFlightReturned()
+        {
+            var flightRepo = new FlightRepository();
+
+            var expectedFlights = new List<Flight>()
+            {
+                new Flight
+                {
+                    Id = 1,
+                    Airline = "",
+                    DepartureAirport = "MAN",
+                    DestinationAirport = "TFS",
+                    DepartureDate = "2023-07-01"
+                }
+            };
+
+            var actualFlights = flightRepo.GetFlights("MAN", "TFS", "2023-07-01");
+
+            Assert.AreEqual(expectedFlights.Count, actualFlights.Count);
+            Assert.AreEqual(expectedFlights.First().Id, actualFlights.First().Id);
+        }
     }
 }

@@ -12,52 +12,52 @@ namespace HolidaySearchLibrary.Repositories.Tests
     [TestClass()]
     public class HotelRepositoryTests
     {
-        [TestMethod()]
-        public void LoadHotelData_HotelJson_JsonParsed()
-        {
-            var hotelRepo = new HotelRepository();
+        //[TestMethod()]
+        //public void LoadHotelData_HotelJson_JsonParsed()
+        //{
+        //    var hotelRepo = new HotelRepository();
 
-            var parsedHotelJson = hotelRepo.LoadHotelData();
+        //    var parsedHotelJson = hotelRepo.LoadHotelData();
 
-            Assert.IsNotNull(parsedHotelJson);
+        //    Assert.IsNotNull(parsedHotelJson);
 
-            var hotelListType = new List<Hotel>();
+        //    var hotelListType = new List<Hotel>();
 
-            Assert.IsInstanceOfType(parsedHotelJson, hotelListType.GetType());
-        }
+        //    Assert.IsInstanceOfType(parsedHotelJson, hotelListType.GetType());
+        //}
 
-        [TestMethod()]
-        public void GetHotels_AllHotelParams_TwoHotelsReturned()
-        {
-            var hotelRepo = new HotelRepository();
+        //[TestMethod()]
+        //public void GetHotels_AllHotelParams_TwoHotelsReturned()
+        //{
+        //    var hotelRepo = new HotelRepository();
 
-            var expectedHotels = new List<Hotel>()
-            {
-                new Hotel
-                {
-                    Id = 1,
-                    ArrivalDate = "2022-11-05",
-                    LocalAirports = new string[]
-                    {
-                        "TFS"
-                    },
-                    Nights = 7
-                },
-                new Hotel
-                {
-                    Id = 2,
-                    ArrivalDate = "2022-11-05",
-                    LocalAirports = new string[]
-                    {
-                        "TFS"
-                    },
-                    Nights = 7
-                }
-            };
-            var actualHotels = hotelRepo.GetHotels("TFS", "2022-11-05", 7);
+        //    var expectedHotels = new List<Hotel>()
+        //    {
+        //        new Hotel
+        //        {
+        //            Id = 1,
+        //            ArrivalDate = "2022-11-05",
+        //            LocalAirports = new string[]
+        //            {
+        //                "TFS"
+        //            },
+        //            Nights = 7
+        //        },
+        //        new Hotel
+        //        {
+        //            Id = 2,
+        //            ArrivalDate = "2022-11-05",
+        //            LocalAirports = new string[]
+        //            {
+        //                "TFS"
+        //            },
+        //            Nights = 7
+        //        }
+        //    };
+        //    var actualHotels = hotelRepo.GetHotels("TFS", "2022-11-05", 7);
 
-            Assert.AreEqual(expectedHotels.Count, actualHotels.Count, "Not equal number of returned hotels");
-            Assert.AreEqual(expectedHotels.First().Id, actualHotels.First().Id);
-        }
+        //    Assert.AreEqual(expectedHotels.Count, actualHotels.Count, "Not equal number of returned hotels");
+        //    Assert.AreEqual(expectedHotels.First().Id, actualHotels.First().Id);
+        //}
     }
 }

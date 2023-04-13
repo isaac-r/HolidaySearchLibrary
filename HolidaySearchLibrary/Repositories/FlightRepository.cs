@@ -10,7 +10,7 @@ namespace HolidaySearchLibrary.Repositories
 {
     public class FlightRepository : IFlightRepository
     {
-        private List<Flight> flights;
+        private List<Flight>? flights;
         public List<Flight> GetFlights(string departureAirport, string destinationAirport, string departureDate)
         {
             throw new NotImplementedException();
@@ -18,7 +18,9 @@ namespace HolidaySearchLibrary.Repositories
 
         public List<Flight> LoadFlightData()
         {
-            throw new NotImplementedException();
+            var filename = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\FlightData.json"));
+            flights = JsonConvert.DeserializeObject<List<Flight>>(filename) ?? new List<Flight>();      
+            return flights;
         }
     }
 }

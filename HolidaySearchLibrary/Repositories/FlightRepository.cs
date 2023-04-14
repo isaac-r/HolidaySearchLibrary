@@ -36,10 +36,23 @@ namespace HolidaySearchLibrary.Repositories
             return flightResults;
         }
 
-        public List<Flight> LoadData()
+        public List<Flight> LoadData(string path, bool isFile)
         {
-            var flightDate = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\FlightData.json"));    
-            return JsonConvert.DeserializeObject<List<Flight>>(flightDate) ?? new List<Flight>();
+            if (string.IsNullOrEmpty(path))
+            {
+                path = Directory.GetCurrentDirectory() + @"\Data\FlightData.json";
+            }
+            string? flightData;
+            if (isFile)
+            {
+                flightData = path;
+            }
+            else
+            {
+                flightData = File.ReadAllText(path);
+            }
+
+            return JsonConvert.DeserializeObject<List<Flight>>(flightData) ?? new List<Flight>();
         }
     }
 }

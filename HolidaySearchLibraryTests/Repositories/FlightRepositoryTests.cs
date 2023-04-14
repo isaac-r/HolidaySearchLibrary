@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HolidaySearchLibrary.Models;
+using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
 
 namespace HolidaySearchLibrary.Repositories.Tests
 {
@@ -111,21 +113,36 @@ namespace HolidaySearchLibrary.Repositories.Tests
                     DepartureDate = "2023-10-25"
                  }
             };
-        //[TestMethod()]
-        //public void LoadFlightData_FlightJson_JsonParsed()
-        //{
-        //    var flightRepo = new FlightRepository();
+        [TestCase("[\r\n  {\r\n    \"id\": 1,\r\n    \"airline\": \"First Class Air\",\r\n    \"from\": \"MAN\",\r\n    \"to\": \"TFS\",\r\n    \"price\": 470,\r\n    \"departure_date\": \"2023-07-01\"\r\n  }]")]
+        public void LoadFlightData_FlightJson_JsonParsed(string flight)
+        {
+            var flightRepo = new FlightRepository();
 
-        //    var parsedFlightJson = flightRepo.LoadData();
+            var parsedFlightJson = flightRepo.LoadData(flight, true);
 
-        //    Assert.IsNotNull(parsedFlightJson);
+            Assert.IsNotNull(parsedFlightJson);
 
-        //    var flightListType = new List<Flight>();
+            var flightListType = new List<Flight>();
 
-        //    Assert.IsInstanceOfType(parsedFlightJson, flightListType.GetType());
-        //}
+            Assert.IsInstanceOf(flightListType.GetType(), parsedFlightJson);
+        }
+        // Local Unit testing data access
+       [Test()]
+        public void LoadFlightData_LocalFlightJson_JsonParsed()
+        {
+            var flightRepo = new FlightRepository();
 
-        [TestMethod()]
+            var parsedFlightJson = flightRepo.LoadData("", false);
+
+            Assert.IsNotNull(parsedFlightJson);
+
+            var flightListType = new List<Flight>();
+
+            Assert.IsInstanceOf(flightListType.GetType(), parsedFlightJson);
+            Assert.AreEqual(12, parsedFlightJson.Count);
+        }
+
+        [Test()]
         public void GetFlights_FromManchesterToMalagaJuly_Flight2Returned()
         {
             var flightRepo = new FlightRepository();
@@ -138,7 +155,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
             Assert.AreEqual(2, orderedFlights.First().Id);
         }
 
-        [TestMethod()]
+        [Test()]
         public void GetFlights_FromLondonToMallorcaJune_2FlightsReturned()
         {
             var flightRepo = new FlightRepository();
@@ -152,7 +169,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
             Assert.AreEqual(4, orderedFlights[1].Id);
         }
 
-        [TestMethod()]
+        [Test()]
         public void GetFlights_FromAllToCanariaNovember_Flight7Returned()
         {
             var flightRepo = new FlightRepository();

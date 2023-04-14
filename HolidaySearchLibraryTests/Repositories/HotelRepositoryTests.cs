@@ -6,10 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HolidaySearchLibrary.Models;
+using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
+using Newtonsoft.Json.Linq;
 
 namespace HolidaySearchLibrary.Repositories.Tests
 {
-    [TestClass()]
+    [TestFixture()]
     public class HotelRepositoryTests
     {
         private readonly List<Hotel> hotels = new List<Hotel>()
@@ -119,21 +122,32 @@ namespace HolidaySearchLibrary.Repositories.Tests
                   Nights=10
                 }
             };
-        //[TestMethod()]
-        //public void LoadHotelData_HotelJson_JsonParsed()
+        [TestCase("[{\r\n    \"id\": 1,\r\n    \"name\": \"Iberostar Grand Portals Nous\",\r\n    \"arrival_date\": \"2022-11-05\",\r\n    \"price_per_night\": 100,\r\n    \"local_airports\": [ \"TFS\" ],\r\n    \"nights\": 7\r\n  }]")]
+        public void LoadHotelData_HotelJson_JsonParsed(string hotel)
+        {
+            var hotelRepo = new HotelRepository();
+
+            var parsedHotelJson = hotelRepo.LoadData(hotel, true);
+
+            var hotelListType = new List<Hotel>();
+
+            Assert.IsInstanceOf(hotelListType.GetType(), parsedHotelJson);
+        }
+        // Local Unit testing data access
+        //[Test()]
+        //public void LoadHotelData_LocalHotelJson_JsonParsed()
         //{
         //    var hotelRepo = new HotelRepository();
 
-        //    var parsedHotelJson = hotelRepo.LoadData();
-
-        //    Assert.IsNotNull(parsedHotelJson);
+        //    var parsedHotelJson = hotelRepo.LoadData("", false);
 
         //    var hotelListType = new List<Hotel>();
 
-        //    Assert.IsInstanceOfType(parsedHotelJson, hotelListType.GetType());
+        //    Assert.IsInstanceOf(hotelListType.GetType(), parsedHotelJson);
+        //    Assert.AreEqual(13, parsedHotelJson.Count);
         //}
 
-        [TestMethod()]
+        [Test()]
         public void GetHotels_MalagaJuly7Nights_Hotel9Returned()
         {
             var hotelRepo = new HotelRepository();
@@ -144,7 +158,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
             Assert.AreEqual(9, actualHotels[0].Id);
         }
 
-        [TestMethod()]
+        [Test()]
         public void GetHotels_MallorcaJune10Nights_TwoHotelsReturned()
         {
             var hotelRepo = new HotelRepository();
@@ -156,7 +170,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
             Assert.AreEqual(13, actualHotels[1].Id);
         }
 
-        [TestMethod()]
+        [Test()]
         public void GetHotels_CanariaNovember14Nights_TwoHotelsReturned()
         {
             var hotelRepo = new HotelRepository();

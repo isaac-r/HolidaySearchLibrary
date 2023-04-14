@@ -18,10 +18,23 @@ namespace HolidaySearchLibrary.Repositories
             return hotelResults;
         }
 
-        public List<Hotel> LoadData()
+        public List<Hotel> LoadData(string path, bool isFile)
         {
-            var filename = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\HotelData.json"));
-            return JsonConvert.DeserializeObject<List<Hotel>>(filename) ?? new List<Hotel>();
+            if (string.IsNullOrEmpty(path))
+            {
+                path = Directory.GetCurrentDirectory() + @"\Data\HotelData.json";
+            }
+            string? hotelData;
+            if (isFile)
+            {
+                hotelData = path;
+            }
+            else
+            {
+                hotelData = File.ReadAllText(path);
+            }
+
+            return JsonConvert.DeserializeObject<List<Hotel>>(hotelData) ?? new List<Hotel>();
         }
     }
 }

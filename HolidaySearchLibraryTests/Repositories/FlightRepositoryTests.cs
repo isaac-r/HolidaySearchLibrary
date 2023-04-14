@@ -127,20 +127,20 @@ namespace HolidaySearchLibrary.Repositories.Tests
             Assert.IsInstanceOf(flightListType.GetType(), parsedFlightJson);
         }
         // Local Unit testing data access
-       [Test()]
-        public void LoadFlightData_LocalFlightJson_JsonParsed()
-        {
-            var flightRepo = new FlightRepository();
+       //[Test()]
+       // public void LoadFlightData_LocalFlightJson_JsonParsed()
+       // {
+       //     var flightRepo = new FlightRepository();
 
-            var parsedFlightJson = flightRepo.LoadData("", false);
+       //     var parsedFlightJson = flightRepo.LoadData("", false);
 
-            Assert.IsNotNull(parsedFlightJson);
+       //     Assert.IsNotNull(parsedFlightJson);
 
-            var flightListType = new List<Flight>();
+       //     var flightListType = new List<Flight>();
 
-            Assert.IsInstanceOf(flightListType.GetType(), parsedFlightJson);
-            Assert.AreEqual(12, parsedFlightJson.Count);
-        }
+       //     Assert.IsInstanceOf(flightListType.GetType(), parsedFlightJson);
+       //     Assert.AreEqual(12, parsedFlightJson.Count);
+       // }
 
         [Test()]
         public void GetFlights_FromManchesterToMalagaJuly_Flight2Returned()

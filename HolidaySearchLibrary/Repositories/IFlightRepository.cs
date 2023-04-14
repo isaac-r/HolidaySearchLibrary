@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace HolidaySearchLibrary.Repositories
 {
-    public interface IFlightRepository
+    public interface IFlightRepository : IBaseRepository<Flight>
     {
         public List<Flight> GetFlights(string[] departureAirports, string destinationAirport, string departureDate, List<Flight> allFlights);
-
-        public List<Flight> LoadFlightData();
     }
 }

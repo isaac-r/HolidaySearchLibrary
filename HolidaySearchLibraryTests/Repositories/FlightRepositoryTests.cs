@@ -116,7 +116,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
         //{
         //    var flightRepo = new FlightRepository();
 
-        //    var parsedFlightJson = flightRepo.LoadFlightData();
+        //    var parsedFlightJson = flightRepo.LoadData();
 
         //    Assert.IsNotNull(parsedFlightJson);
 

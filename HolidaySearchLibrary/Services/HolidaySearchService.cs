@@ -20,8 +20,8 @@ namespace HolidaySearchLibrary.Services
             _hotelRepository = hotelRepository;
 
             // Loading Data from JSON into Service
-            _flights = _flightRepository.LoadData();
-            _hotels = _hotelRepository.LoadData();
+            _flights = _flightRepository.LoadData("", false);
+            _hotels = _hotelRepository.LoadData("", false);
         }
 
         public List<Package> HolidaySearch(string DepartureDate, string[] DepartureAirports, string DestinationAirport, int Duration)

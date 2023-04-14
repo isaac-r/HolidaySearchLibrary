@@ -8,6 +8,6 @@ namespace HolidaySearchLibrary.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {
-        public List<T> LoadData();
+        public List<T> LoadData(string path, bool isFile);
     }
 }

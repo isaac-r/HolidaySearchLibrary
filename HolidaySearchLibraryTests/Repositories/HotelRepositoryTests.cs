@@ -124,7 +124,7 @@ namespace HolidaySearchLibrary.Repositories.Tests
         //{
         //    var hotelRepo = new HotelRepository();
 
-        //    var parsedHotelJson = hotelRepo.LoadHotelData();
+        //    var parsedHotelJson = hotelRepo.LoadData();
 
         //    Assert.IsNotNull(parsedHotelJson);
 

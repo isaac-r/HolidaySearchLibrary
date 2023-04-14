@@ -10,14 +10,12 @@ namespace HolidaySearchLibrary.Repositories
 {
     public class FlightRepository : IFlightRepository
     {
-        private List<Flight> flights;
-        public List<Flight> GetFlights(string[] departureAirports, string destinationAirport, string departureDate)
+        public List<Flight> GetFlights(string[] departureAirports, string destinationAirport, string departureDate, List<Flight> allFlights)
         {
-            LoadFlightData();
             List<Flight> flightResults = new();
             if (departureAirports.Length == 1)
             {
-                flightResults = flights
+                flightResults = allFlights
                     .FindAll(f => f.DepartureAirport == departureAirports[0])
                     .FindAll(f => f.DestinationAirport == destinationAirport)
                     .FindAll(f => f.DepartureDate == departureDate);
@@ -27,7 +25,7 @@ namespace HolidaySearchLibrary.Repositories
                 foreach (var airport in departureAirports)
                 {
                     var filteredFlights = new List<Flight>();
-                    filteredFlights = flights.FindAll(f => f.DepartureAirport == airport);
+                    filteredFlights = allFlights.FindAll(f => f.DepartureAirport == airport);
                     tempFlightsList.AddRange(filteredFlights);
                 }
                 flightResults = tempFlightsList.ToList()
@@ -40,9 +38,8 @@ namespace HolidaySearchLibrary.Repositories
 
         public List<Flight> LoadFlightData()
         {
-            var filename = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\FlightData.json"));
-            flights = JsonConvert.DeserializeObject<List<Flight>>(filename) ?? new List<Flight>();      
-            return flights;
+            var flightDate = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\FlightData.json"));    
+            return JsonConvert.DeserializeObject<List<Flight>>(flightDate) ?? new List<Flight>();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace HolidaySearchLibrary.Repositories
             return hotelResults;
         }
 
-        public List<Hotel> LoadHotelData()
+        public List<Hotel> LoadData()
         {
             var filename = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\HotelData.json"));
             return JsonConvert.DeserializeObject<List<Hotel>>(filename) ?? new List<Hotel>();

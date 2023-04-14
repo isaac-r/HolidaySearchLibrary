@@ -36,7 +36,7 @@ namespace HolidaySearchLibrary.Repositories
             return flightResults;
         }
 
-        public List<Flight> LoadFlightData()
+        public List<Flight> LoadData()
         {
             var flightDate = File.ReadAllText((Directory.GetCurrentDirectory() + @"\Data\FlightData.json"));    
             return JsonConvert.DeserializeObject<List<Flight>>(flightDate) ?? new List<Flight>();

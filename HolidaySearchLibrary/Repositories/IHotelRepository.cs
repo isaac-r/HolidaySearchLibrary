@@ -9,7 +9,7 @@ namespace HolidaySearchLibrary.Repositories
 {
     public interface IHotelRepository
     {
-        public List<Hotel> GetHotels(string arrivalAirport, string arrivalDate, int duration);
+        public List<Hotel> GetHotels(string arrivalAirport, string arrivalDate, int duration, List<Hotel> allHotels);
 
         public List<Hotel> LoadHotelData();
     }
